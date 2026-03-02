@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-02-28 22:06:31.607597 by Eclipse SUMO randomTrips.py v1_26_0+0000-fa7df22d7f1
+<configuration>
+    <net-file value="sumo_config/urban.net.xml"/>
+    <route-file value="sumo_config/urban.rou.xml"/>
+    <end value="20.0"/>
+    <period value="2.0"/>
+</configuration>
+-->
+
+<!-- generated on 2026-02-28T22:06:31.544481+05:30 by Eclipse SUMO duarouter 1.26.0
+<duarouterConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
+
+    <input>
+        <net-file value="sumo_config/urban.net.xml"/>
+        <route-files value="trips.trips.xml"/>
+    </input>
+
+    <output>
+        <output-file value="sumo_config/urban.rou.xml"/>
+        <alternatives-output value="NUL"/>
+    </output>
+
+    <time>
+        <begin value="0.0"/>
+        <end value="20.0"/>
+    </time>
+
+    <report>
+        <no-warnings value="true"/>
+        <ignore-errors value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+</duarouterConfiguration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="ev" accel="2.6" decel="4.5" sigma="0.5" length="5" minGap="2.5" maxSpeed="15" color="0,128,255" guiShape="passenger/sedan"/>
+    <vehicle id="0" type="ev" depart="0.00">
+        <route edges="C1D1 D1C1 C1B1 B1A1 A1A0 A0B0"/>
+    </vehicle>
+    <vehicle id="1" type="ev" depart="2.00">
+        <route edges="B1A1 A1B1 B1B0 B0A0"/>
+    </vehicle>
+    <vehicle id="2" type="ev" depart="4.00">
+        <route edges="C3B3 B3B2 B2C2 C2C1"/>
+    </vehicle>
+    <vehicle id="3" type="ev" depart="6.00">
+        <route edges="D1D2 D2C2 C2B2 B2A2 A2A1 A1B1"/>
+    </vehicle>
+    <vehicle id="4" type="ev" depart="8.00">
+        <route edges="B2C2 C2C1 C1B1 B1A1 A1A0 A0B0"/>
+    </vehicle>
+    <vehicle id="5" type="ev" depart="10.00">
+        <route edges="B0A0 A0A1 A1B1 B1C1 C1C0 C0B0"/>
+    </vehicle>
+    <vehicle id="6" type="ev" depart="12.00">
+        <route edges="A0B0 B0B1 B1B2 B2A2 A2A3 A3B3"/>
+    </vehicle>
+    <vehicle id="7" type="ev" depart="14.00">
+        <route edges="C2B2 B2B1 B1B0 B0C0 C0D0"/>
+    </vehicle>
+    <vehicle id="8" type="ev" depart="16.00">
+        <route edges="B0A0 A0A1 A1B1 B1C1 C1C0"/>
+    </vehicle>
+    <vehicle id="9" type="ev" depart="18.00">
+        <route edges="D0C0 C0B0 B0A0 A0A1"/>
+    </vehicle>
+</routes>
