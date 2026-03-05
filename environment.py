@@ -397,11 +397,20 @@ class SUMOSpectrumEnvironment:
         self.episode_metrics = {}
 
     def _start_sumo(self):
-        """Start a new SUMO simulation instance."""
+        """Start or reload SUMO simulation."""
         import traci
         import os
 
+        # If SUMO is already running, reload or restart
         if self.sumo_running:
+            if not self.use_gui:
+                # Headless: reload simulation (faster, no process restart)
+                try:
+                    traci.load(['-c', self.sumo_cfg, '--no-warnings', '--no-step-log'])
+                    return
+                except Exception:
+                    pass
+            # GUI mode or reload failed: full restart
             try:
                 traci.close()
             except Exception:
@@ -424,9 +433,11 @@ class SUMOSpectrumEnvironment:
 
         # Add GUI-specific flags for visible vehicle movement
         if self.use_gui:
-            sumo_cmd += ['--delay', '50', '--quit-on-end']
+            sumo_cmd += ['--delay', '50']
 
-        traci.start(sumo_cmd)
+        import random
+        port = random.randint(10000, 60000)
+        traci.start(sumo_cmd, port=port, numRetries=3)
         self.sumo_running = True
 
     def _stop_sumo(self):
@@ -504,6 +515,25 @@ class SUMOSpectrumEnvironment:
             channel_id = int(action)
             self.channels[channel_id].users.append(agent_id)
             self.agent_data[agent_id]['previous_action'] = channel_id
+
+        # Color vehicles by channel selection (visible in SUMO-GUI)
+        channel_colors = {
+            0: (0, 0, 255),      # Blue
+            1: (255, 0, 0),      # Red
+            2: (0, 255, 0),      # Green
+            3: (255, 255, 0),    # Yellow
+            4: (255, 0, 255)     # Purple
+        }
+        
+        try:
+            active_vehicles = set(traci.vehicle.getIDList())
+            for agent_id, action in enumerate(actions):
+                vid = self.sumo_vehicle_ids[agent_id]
+                if vid in active_vehicles:
+                    color = channel_colors.get(int(action), (255, 255, 255))
+                    traci.vehicle.setColor(vid, color)
+        except Exception:
+            pass
 
         # Compute rewards (same logic as standalone)
         rewards = []
@@ -588,8 +618,13 @@ class SUMOSpectrumEnvironment:
                 continue
             other_pos = self.agent_data[other_id]['position']
             dist = np.sqrt(np.sum((my_pos - other_pos) ** 2))
-            dist = max(dist, 1.0)  # Minimum distance
-            path_loss = 1.0 / (dist ** PATH_LOSS_EXPONENT)
+            
+            # Scale distance for real-world SUMO coordinates (meters)
+            # In urban V2V, interference range is ~200-300m
+            # Normalize so 30m = 1 grid unit for strong collisions
+            scaled_dist = max(dist / 30.0, 0.5)
+            
+            path_loss = 1.0 / (scaled_dist ** PATH_LOSS_EXPONENT)
             interference += INTERFERENCE_FACTOR * TRANSMISSION_POWER * path_loss
         return interference
 

@@ -1,0 +1,34 @@
+<viewsettings>
+    <!-- Background: dark grey like satellite view -->
+    <scheme name="realistic">
+        <opengl dither="true" fps="true" drawBoundaries="false"/>
+    </scheme>
+
+    <background backgroundColor="0.75,0.82,0.71" showGrid="false"/>
+
+    <!-- Road coloring -->
+    <edge>
+        <scheme name="uniform">
+            <entry color="0.45,0.45,0.45"/>
+        </scheme>
+    </edge>
+
+    <!-- Vehicles: show as realistic shapes with labels -->
+    <vehicles vehicleSize="1.5" vehicleSize.minSize="1.0"
+              showBlinker="true" vehicleQuality="2"
+              vehicleName.show="true" vehicleName.size="12"
+              vehicleName.color="white">
+        <scheme name="given/assigned vehicle color"/>
+    </vehicles>
+
+    <!-- Junctions -->
+    <junction junctionSize="1.0">
+        <scheme name="uniform">
+            <entry color="0.55,0.55,0.55"/>
+        </scheme>
+    </junction>
+
+    <!-- Show building polygons with fill -->
+    <poly polySize="0" polyName.show="false"/>
+
+</viewsettings>

@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2026-02-28 22:06:31.400623 by Eclipse SUMO randomTrips.py v1_26_0+0000-fa7df22d7f1
+<!-- generated on 2026-03-02 21:43:12.445355 by Eclipse SUMO randomTrips.py v1_26_0+0000-fa7df22d7f1
 <configuration>
-    <net-file value="sumo_config/urban.net.xml"/>
-    <route-file value="sumo_config/urban.rou.xml"/>
-    <end value="20.0"/>
-    <period value="2.0"/>
+    <net-file value="sumo_config\osm_network.net.xml"/>
+    <route-file value="sumo_config\osm_routes.rou.xml"/>
+    <end value="50.0"/>
+    <period value="2.5"/>
 </configuration>
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
-    <trip id="0" depart="0.00" from="C1D1" to="A0B0"/>
-    <trip id="1" depart="2.00" from="B1A1" to="B0A0"/>
-    <trip id="2" depart="4.00" from="C3B3" to="C2C1"/>
-    <trip id="3" depart="6.00" from="D1D2" to="A1B1"/>
-    <trip id="4" depart="8.00" from="B2C2" to="A0B0"/>
-    <trip id="5" depart="10.00" from="B0A0" to="C0B0"/>
-    <trip id="6" depart="12.00" from="A0B0" to="A3B3"/>
-    <trip id="7" depart="14.00" from="C2B2" to="C0D0"/>
-    <trip id="8" depart="16.00" from="B0A0" to="C1C0"/>
-    <trip id="9" depart="18.00" from="D0C0" to="A0A1"/>
+    <trip id="0" depart="0.00" from="1305539703#2" to="-1066080812"/>
+    <trip id="1" depart="2.50" from="-1348207856#0" to="-1346407673"/>
+    <trip id="2" depart="5.00" from="1339371203#1" to="1339368569#2"/>
+    <trip id="3" depart="7.50" from="510070849#1" to="-1120471076"/>
+    <trip id="4" depart="10.00" from="-573010069#0" to="-1066092709"/>
+    <trip id="5" depart="12.50" from="-1339368599#2" to="1066097022#2"/>
+    <trip id="6" depart="15.00" from="-1002473259" to="-1339368640#1"/>
+    <trip id="7" depart="17.50" from="131252329#15" to="1066109723"/>
+    <trip id="8" depart="20.00" from="-1339368604#0" to="1190181264"/>
+    <trip id="9" depart="22.50" from="207305848#4" to="-1000757638#6"/>
+    <trip id="10" depart="25.00" from="207305844#1" to="1339368613#0"/>
+    <trip id="11" depart="27.50" from="-242699985#0" to="-1339368531#1"/>
+    <trip id="12" depart="30.00" from="66211507#0" to="-498355709#1"/>
+    <trip id="13" depart="32.50" from="-1095117462#0" to="-1141931747"/>
+    <trip id="14" depart="35.00" from="325260989#3" to="1305539709"/>
+    <trip id="15" depart="37.50" from="207305844#5" to="1346407672#0"/>
+    <trip id="16" depart="40.00" from="1064669230#1" to="924162708#2"/>
+    <trip id="17" depart="42.50" from="-498355708#1" to="1066110584#1"/>
+    <trip id="18" depart="45.00" from="240737150" to="1329807708"/>
+    <trip id="19" depart="47.50" from="497321502#3" to="1126873799"/>
 </routes>

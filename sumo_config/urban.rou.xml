@@ -37,7 +37,7 @@
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
-    <vType id="ev" accel="2.6" decel="4.5" sigma="0.5" length="5" minGap="2.5" maxSpeed="15" color="0,128,255" guiShape="passenger/sedan"/>
+    <vType id="ev" accel="2.6" decel="4.5" sigma="0.5" length="5" minGap="2.5" maxSpeed="15" color="0,128,255" guiShape="passenger"/>
     <vehicle id="0" type="ev" depart="0.00">
         <route edges="C1D1 D1C1 C1B1 B1A1 A1A0 A0B0"/>
     </vehicle>

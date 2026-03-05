@@ -61,8 +61,8 @@ REWARD_IDLE = 0.0             # Reward when no action needed
 # SUMO Simulator Settings
 # =============================================================================
 USE_SUMO = True               # Toggle SUMO integration (True=SUMO, False=standalone)
-SUMO_CONFIG = "sumo_config/urban.sumocfg"  # Path to SUMO config file
-SUMO_GUI = True              # Use sumo-gui instead of sumo (for visualization)
+SUMO_CONFIG = "sumo_config/city.sumocfg"  # Realistic OSM network
+SUMO_GUI = False              # Set True only for demos (slow), False for training (fast)
 SUMO_STEP_LENGTH = 1.0        # SUMO simulation step length in seconds
 
 # =============================================================================
