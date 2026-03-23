@@ -140,8 +140,12 @@ def plot_metric_comparison(results, save_dir=RESULTS_DIR):
                       linewidth=1.5, width=0.5)
 
         # Add value labels on bars
+        max_val = max(means)
+        ax.set_ylim(0, max_val * 1.15) # Give 15% headroom for text
         for bar, mean in zip(bars, means):
-            ax.text(bar.get_x() + bar.get_width()/2., bar.get_height() + 0.01,
+            # Scale the vertical offset based on the max value so it works for tiny and huge numbers
+            offset = max_val * 0.02
+            ax.text(bar.get_x() + bar.get_width()/2., bar.get_height() + offset,
                     f'{mean:.3f}', ha='center', va='bottom', fontweight='bold',
                     fontsize=10)
 

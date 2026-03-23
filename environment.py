@@ -535,7 +535,8 @@ class SUMOSpectrumEnvironment:
         except Exception:
             pass
 
-        # Compute rewards (same logic as standalone)
+        # Compute rewards using contention-based collision model
+        # In spectrum allocation: multiple users on same channel = interference
         rewards = []
         for agent_id, action in enumerate(actions):
             channel_id = int(action)
@@ -547,6 +548,7 @@ class SUMOSpectrumEnvironment:
             num_users = channel.get_num_users()
 
             if num_users == 1:
+                # Sole user on channel — guaranteed successful transmission
                 reward = REWARD_SUCCESS
                 data['packets_delivered'] += 1
                 data['remaining_payload'] -= 1
@@ -556,11 +558,13 @@ class SUMOSpectrumEnvironment:
                 self.episode_metrics['total_latency'] += latency
                 self.episode_metrics['latency_count'] += 1
             else:
-                # Calculate distance-based interference
+                # Multiple users: calculate SINR based on distance
                 interference = self._calc_interference(agent_id, channel_id)
                 sinr = TRANSMISSION_POWER / (NOISE_POWER + interference)
+                
                 if sinr >= SNR_THRESHOLD:
-                    reward = REWARD_SUCCESS * 0.5
+                    # Signal strong enough despite interference (Spatial Reuse)
+                    reward = REWARD_SUCCESS
                     data['packets_delivered'] += 1
                     data['remaining_payload'] -= 1
                     self.episode_metrics['successful_transmissions'] += 1
@@ -569,6 +573,7 @@ class SUMOSpectrumEnvironment:
                     self.episode_metrics['total_latency'] += latency
                     self.episode_metrics['latency_count'] += 1
                 else:
+                    # Collision - signal too weak due to nearby interference
                     reward = REWARD_COLLISION
                     data['collisions_count'] += 1
                     self.episode_metrics['collisions'] += 1
