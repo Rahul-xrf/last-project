@@ -34,6 +34,8 @@ def parse_args():
                         help='Run evaluation phase')
     parser.add_argument('--visualize', action='store_true',
                         help='Generate visualization plots')
+    parser.add_argument('--demo', action='store_true',
+                        help='Run the enhanced SUMO visualization demo')
     parser.add_argument('--episodes', type=int, default=NUM_EPISODES,
                         help=f'Number of training episodes (default: {NUM_EPISODES})')
     parser.add_argument('--eval-episodes', type=int, default=EVAL_EPISODES,
@@ -99,7 +101,7 @@ def main():
     args = parse_args()
 
     # If no specific phase selected, run everything
-    run_all = not (args.train or args.evaluate or args.visualize)
+    run_all = not (args.train or args.evaluate or args.visualize or args.demo)
 
     print()
     print("=" * 65)
@@ -108,7 +110,8 @@ def main():
     print("=" * 65)
     print(f"  Modules:  {'Train' if (args.train or run_all) else ''}  "
           f"{'Evaluate' if (args.evaluate or run_all) else ''}  "
-          f"{'Visualize' if (args.visualize or run_all) else ''}")
+          f"{'Visualize' if (args.visualize or run_all) else ''}  "
+          f"{'Demo' if args.demo else ''}")
     print("=" * 65)
     print()
 
@@ -163,6 +166,15 @@ def main():
             return
 
         plot_all(history=history, results=results)
+
+    # =========================================================================
+    # Phase 4: Enhanced Visualization Demo
+    # =========================================================================
+    if args.demo:
+        print("\n[Phase 4] Enhanced SUMO Visual Demo")
+        print("-" * 40)
+        from demo_sumo import run_demo
+        run_demo([])
 
     # =========================================================================
     # Summary
